@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicair Korea | 2026 Global Proposal (Detailed)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Fonts -->
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* Language & Font Setup */
+        .lang-ko body { font-family: 'NanumSquareRound', sans-serif; word-break: keep-all; }
+        .lang-en body { font-family: 'Roboto', sans-serif; }
+        
+        body { background-color: #f8fafc; color: #334155; transition: background-color 0.3s ease; }
+        
+        /* Language Visibility Utility */
+        .lang-en .only-ko { display: none !important; }
+        .lang-ko .only-en { display: none !important; }
+
+        /* Chart Container Responsiveness */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px; /* Mobile height */
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; } /* Desktop height */
+        }
+
+        /* Custom Scrollbar for Q&A */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        /* Mobile Menu Transition */
+        #mobile-menu { transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out; overflow: hidden; max-height: 0; opacity: 0; }
+        #mobile-menu.open { max-height: 400px; opacity: 1; }
+
+        /* Q&A Card Styling for detailed text */
+        .qna-card p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="antialiased lang-ko">
+
+    <!-- NAVIGATION -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo (Updated with Image) -->
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <img src="유니케어코리아_로고.png" alt="Unicair Korea Logo" class="h-10 w-auto object-contain">
+                    <span class="font-extrabold text-lg md:text-xl text-slate-900 tracking-tight ml-2">Unicair Korea</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-slate-600 hover:text-blue-600 font-medium transition text-sm lg:text-base">
+                        <span class="only-ko">제안 개요</span><span class="only-en">Overview</span>
+                    </a>
+                    <a href="#partners" class="text-slate-600 hover:text-blue-600 font-medium transition text-sm lg:text-base">
+                        <span class="only-ko">파트너 분석</span><span class="only-en">Partners</span>
+                    </a>
+                    <a href="#whyus" class="text-slate-600 hover:text-blue-600 font-medium transition text-sm lg:text-base">
+                        <span class="only-ko">Why Unicair</span><span class="only-en">Why Unicair</span>
+                    </a>
+                    <a href="#knowledge" class="text-slate-600 hover:text-blue-600 font-medium transition text-sm lg:text-base">
+                        <span class="only-ko">지식 베이스</span><span class="only-en">Knowledge Base</span>
+                    </a>
+                </div>
+
+                <!-- Right Actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Lang Toggle -->
+                    <button id="langToggle" class="flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-300 text-xs md:text-sm font-bold text-slate-700 hover:bg-slate-100 transition">
+                        <span>🇰🇷/🇺🇸</span> <span id="langText">KR</span>
+                    </button>
+                    <!-- Contact Btn -->
+                    <a href="mailto:sales@unicair.co.kr" class="hidden md:block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-700 transition shadow-md hover:shadow-lg">
+                        <span class="only-ko">문의하기</span><span class="only-en">Contact</span>
+                    </a>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-md">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="md:hidden bg-white border-b border-slate-200">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#overview" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">
+                    <span class="only-ko">제안 개요</span><span class="only-en">Overview</span>
+                </a>
+                <a href="#partners" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">
+                    <span class="only-ko">파트너 분석</span><span class="only-en">Partners</span>
+                </a>
+                <a href="#whyus" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">
+                    <span class="only-ko">Why Unicair</span><span class="only-en">Why Unicair</span>
+                </a>
+                <a href="#knowledge" class="mobile-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">
+                    <span class="only-ko">지식 베이스</span><span class="only-en">Knowledge Base</span>
+                </a>
+                <a href="mailto:sales@unicair.co.kr" class="block w-full text-center mt-4 bg-blue-600 text-white px-4 py-3 rounded-lg font-bold">
+                    <span class="only-ko">문의하기</span><span class="only-en">Contact Us</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-24">
+
+        <!-- 1. PROPOSAL OVERVIEW (Detailed) -->
+        <section id="overview" class="pt-4">
+            <div class="text-center mb-12">
+                <div class="inline-block bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase mb-4 border border-blue-100">2026 Proposal</div>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">
+                    <span class="only-ko">글로벌 제조 인프라<br class="md:hidden"> 연결 플랫폼</span>
+                    <span class="only-en">Global Manufacturing<br class="md:hidden"> Infrastructure Platform</span>
+                </h1>
+                <p class="text-lg md:text-2xl text-slate-500 font-light max-w-4xl mx-auto leading-relaxed">
+                    <span class="only-ko">"삼성의 <strong>품질</strong>, 중국의 <strong>가격</strong>,<br class="md:hidden"> 한국의 <strong>관리</strong>를 결합하다"</span>
+                    <span class="only-en">"Combining Samsung <strong>Quality</strong>, China <strong>Price</strong>,<br class="md:hidden"> and Korean <strong>Management</strong>"</span>
+                </p>
+                <p class="mt-4 text-slate-500 max-w-3xl mx-auto">
+                    <span class="only-ko">유니케어코리아는 단순한 중개자가 아닙니다. 글로벌 Top-Tier 제조 인프라와 한국 통신사급 품질 관리 시스템을 결합하여, 귀사의 제품 경쟁력을 극대화하는 전략적 제조 파트너입니다.</span>
+                    <span class="only-en">Unicair Korea is not just a middleman. We are a strategic manufacturing partner that combines global top-tier manufacturing infrastructure with Korean carrier-grade quality management systems to maximize your product competitiveness.</span>
+                </p>
+            </div>
+
+            <!-- 3 Core Cards (Detailed) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-all text-center group">
+                    <div class="w-14 h-14 mx-auto bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="cpu" width="28"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">High-End Tech</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        <span class="only-ko">삼성전자, 인텔 등 글로벌 기업의 메인 벤더인 <strong>숭다기술(Suntak)</strong>의 검증된 생산 라인을 직접 활용합니다.</span>
+                        <span class="only-en">Utilize the verified production lines of <strong>Suntak Technology</strong>, a main vendor for global giants like Samsung Electronics and Intel.</span>
+                    </p>
+                    <div class="text-xs bg-slate-50 py-2 px-3 rounded text-slate-500 font-medium leading-relaxed">
+                        <span class="only-ko">최대 78층 적층 / AnyLayer HDI 구현 가능</span>
+                        <span class="only-en">Max 78 Layers / AnyLayer HDI Capable</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-all text-center group">
+                    <div class="w-14 h-14 mx-auto bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="trending-down" width="28"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Cost Innovation</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        <span class="only-ko">1,000여 개 고객사의 물량을 통합하는 <strong>집단 구매(Aggregation)</strong> 시스템으로 압도적인 원가 경쟁력을 확보합니다.</span>
+                        <span class="only-en">Secure overwhelming cost competitiveness through our <strong>Aggregation</strong> system, pooling volume from over 1,000 clients.</span>
+                    </p>
+                    <div class="text-xs bg-slate-50 py-2 px-3 rounded text-slate-500 font-medium leading-relaxed">
+                        <span class="only-ko">개별 소싱 대비 평균 15% 이상 절감</span>
+                        <span class="only-en">Avg. over 15% savings vs individual sourcing</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-all text-center group">
+                    <div class="w-14 h-14 mx-auto bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="shield-check" width="28"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Risk Free</h3>
+                    <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                        <span class="only-ko">모든 계약과 품질 보증은 <strong>한국 법인</strong>이 책임지며, 중국 현지에 상주하는 한국 엔지니어가 실시간으로 관리합니다.</span>
+                        <span class="only-en">All contracts and warranties are the responsibility of the <strong>Korean entity</strong>, managed in real-time by Korean engineers stationed in China.</span>
+                    </p>
+                    <div class="text-xs bg-slate-50 py-2 px-3 rounded text-slate-500 font-medium leading-relaxed">
+                        <span class="only-ko">통신사(KT/LGU+)급 QA 기준 적용</span>
+                        <span class="only-en">Applies Carrier-Grade (KT/LGU+) QA Standards</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PARTNER ANALYSIS (Detailed) -->
+        <section id="partners" class="bg-white rounded-3xl p-6 md:p-12 shadow-xl border border-slate-100">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+                    <span class="only-ko">파트너 핵심 역량 분석</span>
+                    <span class="only-en">Partner Core Analysis</span>
+                </h2>
+                <p class="text-slate-500 text-sm md:text-base max-w-3xl mx-auto">
+                    <span class="only-ko">글로벌 Top-Tier 기술력을 보유한 Suntak과 최적의 비용 효율을 제공하는 Eco-Partner의 강점을 결합하여 프로젝트별 최적의 솔루션을 제공합니다.</span>
+                    <span class="only-en">We provide optimal solutions for each project by combining the strengths of Suntak, possessing global Top-Tier technology, and Eco-Partners, offering the best cost efficiency.</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Tech Chart -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-700 mb-4 text-center flex items-center justify-center gap-2">
+                        <i data-lucide="layers" class="text-blue-500"></i>
+                        <span class="only-ko">기술력 격차 (Technology Gap)</span>
+                        <span class="only-en">Technology Gap</span>
+                    </h3>
+                    <div class="chart-container bg-slate-50 rounded-2xl p-4 border border-slate-200">
+                        <canvas id="techChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center text-slate-500 mt-4 leading-relaxed px-4">
+                        <span class="only-ko">일반적인 PCB 공장이 4~6층 제조에 머무르는 반면, 파트너사 <strong>숭다기술(Suntak)</strong>은 슈퍼컴퓨터급에 해당하는 최대 <strong>78층</strong>까지의 초고다층 기판 제조 능력을 보유하고 있습니다.</span>
+                        <span class="only-en">While standard PCB factories are limited to 4-6 layers, our partner <strong>Suntak Technology</strong> possesses the capability to manufacture ultra-high layer PCBs up to <strong>78 layers</strong>, suitable for supercomputers.</span>
+                    </p>
+                </div>
+
+                <!-- Cost Chart -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-700 mb-4 text-center flex items-center justify-center gap-2">
+                        <i data-lucide="pie-chart" class="text-teal-500"></i>
+                        <span class="only-ko">원가 구조 비교 (Cost Structure)</span>
+                        <span class="only-en">Cost Structure Comparison</span>
+                    </h3>
+                    <div class="chart-container bg-slate-50 rounded-2xl p-4 border border-slate-200">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center text-slate-500 mt-4 leading-relaxed px-4">
+                        <span class="only-ko">유니케어의 <strong>집단 구매(Aggregation)</strong> 시스템을 통해 자재비와 공정 비용을 획기적으로 낮추어, 개별적으로 중국 공장과 거래할 때보다 평균 <strong>15% 이상</strong>의 총 제조 원가 절감 효과를 제공합니다.</span>
+                        <span class="only-en">Unicair's <strong>Aggregation</strong> system significantly lowers material and processing costs, offering an average total manufacturing cost reduction of over <strong>15%</strong> compared to dealing with Chinese factories individually.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. WHY UNICAIR (Detailed) -->
+        <section id="whyus" class="bg-slate-900 text-white rounded-3xl p-8 md:p-12 relative overflow-hidden">
+            <!-- Background Blob -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-teal-500 rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">
+                        <span class="only-ko">왜 Unicair Korea여야 하는가?</span>
+                        <span class="only-en">Why Choose Unicair Korea?</span>
+                    </h2>
+                    <p class="text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                        <span class="only-ko">우리는 단순한 제조 중개 플랫폼이 아닙니다. <strong>한국 통신사의 엄격한 기준</strong>으로 중국의 거대한 제조 인프라를 통제하고 관리하는 컨트롤 타워(Control Tower)입니다.</span>
+                        <span class="only-en">We are not just a manufacturing brokerage platform. We are a <strong>Control Tower</strong> that controls and manages China's vast manufacturing infrastructure based on the <strong>strict standards of Korean telecommunication carriers</strong>.</span>
+                    </p>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Point 1 -->
+                    <div class="flex flex-col md:flex-row gap-6 bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10 items-start hover:bg-white/15 transition">
+                        <div class="bg-blue-500/20 p-4 rounded-xl shrink-0 text-blue-300">
+                            <i data-lucide="check-circle" width="36" height="36"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-3">
+                                <span class="only-ko">검증된 통신사급 품질 보증 (Q-Mark)</span>
+                                <span class="only-en">Verified Carrier-Grade Quality (Q-Mark)</span>
+                            </h3>
+                            <p class="text-slate-300 text-base leading-relaxed">
+                                <span class="only-ko">KT, LG U+ 등 국내 주요 통신사에 LTE 단말기를 납품하며 검증받은 엄격한 품질 관리 프로세스를 귀사의 제품에 그대로 적용합니다. 단순 샘플 검사가 아닌, 까다로운 환경 신뢰성 테스트와 전수 검사를 통해 불량률 제로에 도전합니다.</span>
+                                <span class="only-en">We apply the rigorous quality control processes, verified by supplying LTE terminals to major Korean carriers like KT and LG U+, directly to your products. We aim for zero defects through demanding environmental reliability tests and 100% inspection, not just simple sampling.</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div class="flex flex-col md:flex-row gap-6 bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10 items-start hover:bg-white/15 transition">
+                        <div class="bg-teal-500/20 p-4 rounded-xl shrink-0 text-teal-300">
+                            <i data-lucide="zap" width="36" height="36"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-3">
+                                <span class="only-ko">Tech-Inside (기술 내재화 역량)</span>
+                                <span class="only-en">Tech-Inside Capabilities</span>
+                            </h3>
+                            <p class="text-slate-300 text-base leading-relaxed">
+                                <span class="only-ko">단순히 도면대로 생산만 하는 에이전시가 아닙니다. Qualcomm, Rockchip 등 주요 칩셋 레벨의 자체 하드웨어/펌웨어 개발 능력을 보유하고 있어, 제조 과정에서 발생하는 기술적 난제나 설계 오류를 주도적으로 해결합니다.</span>
+                                <span class="only-en">We are not just an agency that produces according to drawings. We possess in-house hardware/firmware development capabilities at major chipset levels (Qualcomm, Rockchip, etc.), proactively solving technical challenges or design errors that arise during manufacturing.</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div class="flex flex-col md:flex-row gap-6 bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10 items-start hover:bg-white/15 transition">
+                        <div class="bg-indigo-500/20 p-4 rounded-xl shrink-0 text-indigo-300">
+                            <i data-lucide="briefcase" width="36" height="36"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-3">
+                                <span class="only-ko">가장 안전한 계약 및 소통</span>
+                                <span class="only-en">Safest Contract & Communication</span>
+                            </h3>
+                            <p class="text-slate-300 text-base leading-relaxed">
+                                <span class="only-ko">모든 법적 계약의 당사자는 한국 법인인 '유니케어코리아'입니다. 복잡한 국제 송금, 불안한 품질 보증, 언어 장벽으로 인한 오해 없이, 한국어로 편안하고 안전하게 비즈니스를 진행하십시오.</span>
+                                <span class="only-en">The party to all legal contracts is the Korean entity, 'Unicair Korea'. Conduct business comfortably and safely in Korean (or English) without complex international transfers, unstable warranties, or misunderstandings due to language barriers.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. KNOWLEDGE BASE (Detailed) -->
+        <section id="knowledge">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-slate-200 pb-6 gap-4">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900">
+                        <span class="only-ko">지식 베이스 (Q&A)</span>
+                        <span class="only-en">Knowledge Base (Q&A)</span>
+                    </h2>
+                    <p class="text-slate-500 text-sm mt-2 max-w-2xl leading-relaxed">
+                        <span class="only-ko">100여 개의 실전 영업 데이터를 바탕으로 정리된 상세한 답변을 통해, 유니케어 서비스에 대한 모든 궁금증을 즉시 해결해 드립니다.</span>
+                        <span class="only-en">Instantly resolve all your queries about Unicair services through detailed answers organized based on over 100 actual sales data points.</span>
+                    </p>
+                </div>
+                <!-- Search Input -->
+                <div class="w-full md:w-1/3 relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                        <i data-lucide="search" width="18"></i>
+                    </div>
+                    <input type="text" id="searchInput" class="block w-full pl-10 pr-3 py-2.5 border border-slate-300 rounded-lg bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition shadow-sm" placeholder="Search keywords...">
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap gap-2 mb-6" id="filterContainer">
+                <button class="filter-btn active bg-slate-800 text-white px-4 py-2 rounded-full text-sm font-bold transition shadow-sm" data-category="all">ALL</button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-50 transition shadow-sm" data-category="intro">
+                    <span class="only-ko">회사/신뢰도</span><span class="only-en">Company</span>
+                </button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-50 transition shadow-sm" data-category="tech">
+                    <span class="only-ko">기술/스펙</span><span class="only-en">Tech/Spec</span>
+                </button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-50 transition shadow-sm" data-category="cost">
+                    <span class="only-ko">비용/견적</span><span class="only-en">Cost</span>
+                </button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-50 transition shadow-sm" data-category="quality">
+                    <span class="only-ko">품질/보증</span><span class="only-en">Quality</span>
+                </button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-50 transition shadow-sm" data-category="process">
+                    <span class="only-ko">납기/절차</span><span class="only-en">Process</span>
+                </button>
+                <button class="filter-btn bg-white text-slate-600 border border-slate-200 px-4 py-2 rounded-full text-sm font-bold hover:bg-slate-50 transition shadow-sm" data-category="risk">
+                    <span class="only-ko">보안/리스크</span><span class="only-en">Risk/Security</span>
+                </button>
+            </div>
+
+            <!-- Q&A Grid (Detailed View) -->
+            <div class="grid grid-cols-1 gap-6 custom-scroll h-[600px] overflow-y-auto pr-4" id="qnaGrid">
+                <!-- Content injected by JS -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-200 pt-12 pb-8 text-center md:text-left bg-slate-50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 mt-20">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center gap-2 mb-4 justify-center md:justify-start">
+                        <img src="유니케어코리아_로고.png" alt="Unicair Korea Logo" class="h-8 w-auto grayscale opacity-70">
+                        <span class="font-extrabold text-lg text-slate-700">Unicair Korea</span>
+                    </div>
+                    <p class="text-slate-500 text-sm leading-relaxed max-w-md mx-auto md:mx-0">
+                        <span class="only-ko">우리는 고객사의 성공적인 제품 양산을 위해 존재하는 기술 기반의 제조 파트너입니다. 제조의 처음부터 끝까지 가장 안전하고 효율적인 길을 안내합니다.</span>
+                        <span class="only-en">We are a technology-based manufacturing partner existing for the successful mass production of our clients' products. We guide the safest and most efficient path from start to finish of manufacturing.</span>
+                    </p>
+                </div>
+                <div class="text-sm text-slate-600 font-medium space-y-3 text-center md:text-left w-full md:w-auto">
+                    <div class="flex items-center justify-center md:justify-start gap-2">
+                        <i data-lucide="mail" width="16"></i> sales@unicair.co.kr
+                    </div>
+                    <div class="flex items-center justify-center md:justify-start gap-2">
+                        <i data-lucide="phone" width="16"></i> +82-10-7469-5477
+                    </div>
+                    <div class="flex items-start justify-center md:justify-start gap-2">
+                        <i data-lucide="map-pin" width="16" class="shrink-0 mt-0.5"></i>
+                        <span>
+                            <span class="only-ko">경기도 과천시 과천대로7길 65, B동 1320호</span>
+                            <span class="only-en">1320-ho, B-dong, 65, Gwacheon-daero 7-gil, Gwacheon-si, Korea</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-xs text-slate-400 mt-12 border-t border-slate-200 pt-6">
+                &copy; 2026 Unicair Korea Co., Ltd. All rights reserved.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- SCRIPTS -->
+    <script>
+        // --- DETAILED Q&A DATA ---
+        const qnaData = [
+            // 1. INTRO & CREDIBILITY
+            { 
+                cat: 'intro', 
+                q_ko: "유니케어 코리아는 어떤 회사인가요?", 
+                a_ko: "저희는 글로벌 26위 PCB 제조사인 '숭다기술(Suntak Technology)'의 한국 파트너이자, 중국의 방대한 제조 생태계를 한국 통신사(KT, LGU+)급 품질 기준으로 관리해 드리는 제조 플랫폼 전문 기업입니다. 단순한 중개를 넘어 기술 지원과 품질 보증까지 책임지는 파트너입니다.",
+                q_en: "Who is Unicair Korea?", 
+                a_en: "We are the Korean partner of 'Suntak Technology', a global Top 26 PCB manufacturer. We are a specialized manufacturing platform company that manages China's vast manufacturing ecosystem according to Korean carrier-grade (KT, LGU+) quality standards. We go beyond simple brokerage to provide technical support and quality assurance."
+            },
+            { 
+                cat: 'intro', 
+                q_ko: "중국 공장과 직접 거래하는 것과 무엇이 다른가요?", 
+                a_ko: "가장 큰 차이는 '책임의 주체'와 '소통의 방식'입니다. 유니케어 코리아는 한국 법인으로서 모든 계약과 품질 보증에 대한 법적 책임을 집니다. 또한, 중국 심천 현지에 상주하는 한국인 엔지니어가 실시간으로 공정을 관리하므로 언어 장벽이나 시차로 인한 소통 문제, 그리고 법적 리스크가 전혀 없습니다.",
+                q_en: "How is it different from dealing directly with a Chinese factory?", 
+                a_en: "The biggest differences are the 'party responsible' and the 'method of communication'. As a Korean entity, Unicair Korea takes full legal responsibility for all contracts and quality guarantees. Also, Korean engineers stationed locally in Shenzhen, China, manage the process in real-time, eliminating communication issues due to language barriers or time zones, and removing legal risks."
+            },
+            {
+                cat: 'intro',
+                q_ko: "파트너사인 숭다기술(Suntak)은 신뢰할 만한 곳인가요?",
+                a_ko: "네, 매우 신뢰할 수 있습니다. 숭다기술은 전 세계 PCB 매출 26위, 중국 내 6위에 랭크된 상장 기업입니다. 이미 삼성전자, 인텔, 보쉬, 폭스콘 등 글로벌 Top-Tier 기업들이 엄격한 검증을 마친 후 메인 벤더로 사용하고 있는 세계적인 수준의 공장입니다.",
+                q_en: "Is your partner, Suntak Technology, reliable?",
+                a_en: "Yes, highly reliable. Suntak Technology is a listed company ranked 26th globally and 6th in China for PCB revenue. It is a world-class factory that global Top-Tier companies like Samsung Electronics, Intel, Bosch, and Foxconn use as a main vendor after rigorous verification."
+            },
+
+            // 2. TECHNOLOGY & SPECS
+            { 
+                cat: 'tech', 
+                q_ko: "제작 가능한 최대 층수는 얼마인가요?", 
+                a_ko: "저희 파트너사인 숭다기술은 슈퍼컴퓨터나 고성능 서버에 사용되는 최대 78층까지의 초고다층 PCB 제작 기술을 보유하고 있습니다. 일반적인 양산품은 4층에서 14층이 주력이지만, 고객사의 하이엔드 스펙 요구사항에 맞춰 고난도 사양도 안정적으로 대응 가능합니다.",
+                q_en: "What is the maximum layer count you can manufacture?", 
+                a_en: "Our partner, Suntak Technology, possesses the technology to manufacture ultra-high layer PCBs up to 78 layers, used in supercomputers or high-performance servers. While standard mass production typically ranges from 4 to 14 layers, we can stably handle high-difficulty specifications according to our clients' high-end requirements."
+            },
+            { 
+                cat: 'tech', 
+                q_ko: "HDI (High Density Interconnector) 제작이 가능한가요?", 
+                a_ko: "네, 가능합니다. 1+N+1, 2+N+2 등 다양한 빌드업 방식은 물론, 모든 층을 자유롭게 연결하는 최신 AnyLayer HDI 기술까지 완벽하게 지원합니다. 스마트폰이나 태블릿과 같은 고밀도 집적 회로 설계에 필수적인 기술입니다.",
+                q_en: "Is HDI (High Density Interconnector) manufacturing available?", 
+                a_en: "Yes, it is available. We fully support various build-up methods like 1+N+1, 2+N+2, as well as the latest AnyLayer HDI technology that freely connects all layers. This is essential technology for high-density integrated circuit designs like smartphones or tablets."
+            },
+            { 
+                cat: 'tech', 
+                q_ko: "임피던스(Impedance) 제어가 가능한가요?", 
+                a_ko: "네, 5G 통신 및 고속 데이터 전송을 위한 정밀 임피던스 제어(일반적으로 오차범위 ±10% 이내, 필요시 ±5%까지)가 가능합니다. 출하 시 임피던스 테스트 성적서(TDR Report)를 기본으로 제공하여 신뢰성을 보장합니다.",
+                q_en: "Is Impedance Control available?", 
+                a_en: "Yes, precision impedance control (typically within ±10%, down to ±5% if needed) for 5G communication and high-speed data transmission is available. We provide an Impedance Test Report (TDR Report) upon shipment as standard to ensure reliability."
+            },
+
+            // 3. COST & QUOTATION
+            { 
+                cat: 'cost', 
+                q_ko: "견적을 받으려면 무엇이 필요하며, 시간은 얼마나 걸리나요?", 
+                a_ko: "정확한 견적을 위해 Gerber 파일(RS-274X 포맷)과 제작 수량, 특이사항을 알려주셔야 합니다. PCBA의 경우 BOM 리스트가 추가로 필요합니다. 견적 회신은 PCB 단독의 경우 영업일 기준 24시간 이내, 부품 소싱이 포함된 PCBA는 2~3일 이내에 상세 견적을 드립니다.",
+                q_en: "What is needed for a quote, and how long does it take?", 
+                a_en: "For an accurate quote, we need Gerber files (RS-274X format), quantity, and any special requirements. For PCBA, a BOM list is also needed. We provide detailed quotes within 24 business hours for bare PCBs, and within 2-3 days for PCBA including component sourcing."
+            },
+            { 
+                cat: 'cost', 
+                q_ko: "국내 제작 대비 얼마나 저렴한가요?", 
+                a_ko: "제품의 스펙과 수량에 따라 차이가 있지만, 유니케어 코리아의 집단 구매 시스템을 통해 진행할 경우 국내 제작 대비 평균적으로 15%에서 최대 30% 정도의 총 제조 원가 절감 효과를 기대하실 수 있습니다.",
+                q_en: "How much cheaper is it compared to domestic manufacturing?", 
+                a_en: "While it depends on product specs and quantity, utilizing Unicair Korea's aggregation system typically yields an average total manufacturing cost reduction of 15% up to 30% compared to domestic manufacturing."
+            },
+            { 
+                cat: 'cost', 
+                q_ko: "알리바바(Alibaba)에서 직접 찾는 것보다 저렴한가요?", 
+                a_ko: "단순한 견적 금액만 비교하면 알리바바의 최저가 공장이 더 쌀 수도 있습니다. 하지만 유니케어 코리아는 검증된 1티어 공장만을 사용하며, 불량 발생 시의 대응 비용, 소통 비용, 품질 리스크 비용 등 보이지 않는 '실패 비용'까지 고려했을 때 TCO(총 소유 비용) 관점에서 훨씬 경제적이고 안전합니다.",
+                q_en: "Is it cheaper than finding it directly on Alibaba?", 
+                a_en: "Comparing simple quote prices, the cheapest factories on Alibaba might be lower. However, Unicair Korea uses only verified Tier-1 factories. Considering invisible 'failure costs' such as defect response costs, communication costs, and quality risk costs, we are much more economical and safer from a TCO (Total Cost of Ownership) perspective."
+            },
+
+            // 4. QUALITY & WARRANTY
+            { 
+                cat: 'quality', 
+                q_ko: "불량 발생 시 어떻게 처리하나요? 보증 정책이 궁금합니다.", 
+                a_ko: "납품 후 1년간 품질을 보증합니다. 만약 저희의 귀책 사유로 인한 제조 불량이 확인될 경우, 고객사의 요청에 따라 즉시 무상으로 재제작(Replacement)해 드리거나 해당 금액을 환불(Refund) 처리해 드립니다. 한국 법인이 끝까지 책임지고 해결합니다.",
+                q_en: "How are defects handled? What is your warranty policy?", 
+                a_en: "We guarantee quality for one year after delivery. If a manufacturing defect attributable to us is confirmed, we will immediately provide a free replacement or refund the amount according to the client's request. The Korean entity takes full responsibility for resolution."
+            },
+            { 
+                cat: 'quality', 
+                q_ko: "통신사급 품질 관리는 구체적으로 무엇을 의미하나요?", 
+                a_ko: "KT나 LG U+와 같은 통신사에 단말기를 납품하기 위해 거쳐야 하는 매우 까다로운 품질 기준(Q-Mark)을 의미합니다. 여기에는 일반적인 기능 검사 외에도 가혹한 환경에서의 신뢰성 테스트, 망 연동 테스트 등이 포함되며, 저희는 이러한 엄격한 프로세스에 대한 풍부한 경험과 노하우를 보유하고 있습니다.",
+                q_en: "What does 'carrier-grade quality management' specifically mean?", 
+                a_en: "It refers to the very stringent quality standards (Q-Mark) required to supply terminals to carriers like KT or LG U+. This includes not only general functional tests but also rigorous environmental reliability tests and network interoperability tests. We have extensive experience and know-how with these strict processes."
+            },
+
+            // 5. PROCESS & DELIVERY
+            { 
+                cat: 'process', 
+                q_ko: "표준 납기(Lead Time)와 배송 기간은 얼마나 걸리나요?", 
+                a_ko: "일반적인 2~4층 PCB 샘플은 3~5일, 양산은 10~15일 정도 소요됩니다(공장 출하 기준). 배송은 항공 특송(DHL/Fedex)을 이용하며, 중국 공장에서 출하된 후 한국 도착까지 통관을 포함하여 보통 1~3일 정도 소요됩니다.",
+                q_en: "What are the standard lead time and shipping duration?", 
+                a_en: "Standard 2-4 layer PCB samples take 3-5 days, and mass production takes 10-15 days (ex-factory base). Shipping is via air express (DHL/Fedex), typically taking 1-3 days from factory shipment to arrival in Korea, including customs clearance."
+            },
+            { 
+                cat: 'process', 
+                q_ko: "복잡한 수입 통관 절차를 대행해 주시나요?", 
+                a_ko: "네, 물론입니다. 고객사에서 어려워하시는 수입 통관 업무는 저희와 제휴된 전문 관세사를 통해 원스톱으로 대행해 드립니다. 고객님은 국내에서 물건을 받는 것처럼 편안하게 제품을 수령하시면 됩니다 (DDP 조건 협의 가능).",
+                q_en: "Do you handle complex import customs clearance procedures?", 
+                a_en: "Yes, absolutely. We handle difficult import customs procedures via our partnered professional customs brokers as a one-stop service. You can receive the products comfortably as if receiving them domestically (DDP terms negotiable)."
+            },
+
+            // 6. SECURITY & RISK
+            { 
+                cat: 'risk', 
+                q_ko: "기술 자료나 설계 데이터 유출이 걱정됩니다.", 
+                a_ko: "보안은 저희가 가장 중요하게 생각하는 부분입니다. 고객사와 NDA(기밀유지협약)를 체결하는 것은 물론, 파트너 공장과도 강력한 보안 계약이 맺어져 있습니다. 모든 핵심 설계 데이터는 암호화되어 관리되며, 인가된 인원 외에는 접근이 불가능합니다.",
+                q_en: "I am worried about the leakage of technical data or design data.", 
+                a_en: "Security is our top priority. We sign NDAs with clients and have strong security agreements with partner factories. All key design data is managed with encryption and is inaccessible to unauthorized personnel."
+            },
+            { 
+                cat: 'risk', 
+                q_ko: "만약 중국 공장이 갑자기 문을 닫거나 연락이 두절되면 어떻게 하나요?", 
+                a_ko: "전혀 걱정하실 필요 없습니다. 고객님의 모든 계약 당사자는 한국 법인인 '유니케어코리아'입니다. 현지 공장에 어떤 이슈가 발생하더라도, 저희가 책임을 지고 대체 생산 라인을 가동해서라도 납품의 의무를 완수합니다.",
+                q_en: "What if the Chinese factory suddenly closes or goes out of contact?", 
+                a_en: "You don't need to worry at all. Your contracting party is the Korean entity, 'Unicair Korea'. Even if an issue arises at the local factory, we take responsibility and will fulfill our delivery obligations, even by activating alternative production lines."
+            }
+        ];
+
+        let currentLang = 'ko';
+        let activeCategory = 'all';
+        let techChart, costChart;
+
+        // --- MOBILE MENU ---
+        const btn = document.getElementById('mobileMenuBtn');
+        const menu = document.getElementById('mobile-menu');
+        const links = document.querySelectorAll('.mobile-link');
+
+        btn.addEventListener('click', () => menu.classList.toggle('open'));
+        links.forEach(link => link.addEventListener('click', () => menu.classList.remove('open')));
+
+        // --- LANGUAGE TOGGLE ---
+        document.getElementById('langToggle').addEventListener('click', () => {
+            currentLang = currentLang === 'ko' ? 'en' : 'ko';
+            updateLanguage();
+        });
+
+        function updateLanguage() {
+            const body = document.body;
+            const langText = document.getElementById('langText');
+            
+            if(currentLang === 'ko') {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-ko');
+                langText.innerText = 'KR';
+            } else {
+                body.classList.remove('lang-ko');
+                body.classList.add('lang-en');
+                langText.innerText = 'EN';
+            }
+            
+            updateCharts();
+            renderQnA(document.getElementById('searchInput').value);
+        }
+
+        // --- CHARTS ---
+        function initCharts() {
+            const ctxTech = document.getElementById('techChart').getContext('2d');
+            const ctxCost = document.getElementById('costChart').getContext('2d');
+
+            Chart.defaults.font.family = currentLang === 'ko' ? "'NanumSquareRound', sans-serif" : "'Roboto', sans-serif";
+
+            techChart = new Chart(ctxTech, {
+                type: 'bar',
+                data: {
+                    labels: [], // Set in update
+                    datasets: [{
+                        label: 'Layers',
+                        data: [6, 78],
+                        backgroundColor: ['#cbd5e1', '#2563eb'],
+                        borderRadius: 8,
+                        barThickness: 40
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        y: { beginAtZero: true, grid: { display: false }, ticks: { font: { size: 12 } } }, 
+                        x: { grid: { display: false }, ticks: { font: { size: 12 } } } 
+                    },
+                    layout: { padding: 10 }
+                }
+            });
+
+            costChart = new Chart(ctxCost, {
+                type: 'doughnut',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [15, 85],
+                        backgroundColor: ['#14b8a6', '#e2e8f0'],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { position: 'bottom', labels: { padding: 20, font: { size: 12 } } } 
+                    },
+                    layout: { padding: 20 }
+                }
+            });
+
+            updateCharts();
+        }
+
+        function updateCharts() {
+            // Tech Chart
+            techChart.data.labels = currentLang === 'ko' 
+                ? ['일반 공장 (Standard)', 'Suntak (Unicair)'] 
+                : ['Standard Factory', 'Suntak (Unicair)'];
+            techChart.data.datasets[0].label = currentLang === 'ko' ? '최대 적층수' : 'Max Layers';
+            techChart.update();
+
+            // Cost Chart
+            costChart.data.labels = currentLang === 'ko'
+                ? ['절감액 (Savings)', '제조 비용 (Cost)']
+                : ['Unicair Savings', 'Manufacturing Cost'];
+            costChart.update();
+        }
+
+        // --- Q&A LOGIC ---
+        function renderQnA(term = '') {
+            const grid = document.getElementById('qnaGrid');
+            grid.innerHTML = '';
+
+            const filtered = qnaData.filter(item => {
+                const matchCat = activeCategory === 'all' || item.cat === activeCategory;
+                const q = currentLang === 'ko' ? item.q_ko : item.q_en;
+                const a = currentLang === 'ko' ? item.a_ko : item.a_en;
+                return matchCat && (q.toLowerCase().includes(term.toLowerCase()) || a.toLowerCase().includes(term.toLowerCase()));
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = '<div class="text-center text-slate-400 py-10 italic">No results found matching your criteria.</div>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const q = currentLang === 'ko' ? item.q_ko : item.q_en;
+                const a = currentLang === 'ko' ? item.a_ko : item.a_en;
+                
+                let badgeClass = 'bg-slate-100 text-slate-600';
+                if(item.cat === 'intro') badgeClass = 'bg-blue-100 text-blue-700';
+                if(item.cat === 'tech') badgeClass = 'bg-teal-100 text-teal-700';
+                if(item.cat === 'cost') badgeClass = 'bg-orange-100 text-orange-700';
+                if(item.cat === 'quality') badgeClass = 'bg-indigo-100 text-indigo-700';
+                
+                const card = document.createElement('div');
+                card.className = 'qna-card bg-white p-6 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition duration-200';
+                card.innerHTML = `
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-bold px-3 py-1 rounded-full ${badgeClass} uppercase tracking-wider">${item.cat}</span>
+                    </div>
+                    <h4 class="text-lg font-bold text-slate-900 mb-4 leading-snug">${q}</h4>
+                    <div class="text-slate-600 text-sm leading-relaxed bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        ${a}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filters & Search
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-slate-800', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'text-slate-600', 'border', 'shadow-sm');
+                });
+                e.currentTarget.classList.remove('bg-white', 'text-slate-600', 'border', 'shadow-sm');
+                e.currentTarget.classList.add('bg-slate-800', 'text-white', 'shadow-md');
+                activeCategory = e.currentTarget.dataset.category;
+                renderQnA(document.getElementById('searchInput').value);
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', (e) => renderQnA(e.target.value));
+
+        // --- INIT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initCharts();
+            renderQnA();
+        });
+
+    </script>
+</body>
+</html>
